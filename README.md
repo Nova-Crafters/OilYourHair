@@ -1,2 +1,2 @@
 # OilYourHair
-Website for selling hair oil to other people.
+Website for selling nice hair oil to other people.
