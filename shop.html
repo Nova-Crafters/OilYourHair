@@ -26,9 +26,43 @@
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
         
-        .nav-links { display: flex; list-style: none; gap: 2rem; }
-        .nav-links a { text-decoration: none; color: #333; font-weight: 500; }
-        .nav-links a:hover, .nav-links a.active { color: #2E7D32; }
+        .nav-links { 
+            display: flex; 
+            list-style: none; 
+            gap: 3rem; 
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-links a { 
+            text-decoration: none; 
+            color: #666; 
+            font-weight: 400;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover { 
+            color: #2E7D32; 
+        }
+        
+        .nav-links a.active { 
+            color: #2E7D32; 
+            font-weight: 500;
+        }
+        
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #2E7D32, #4CAF50);
+            border-radius: 1px;
+        }
         
         .cart-toggle {
             background: linear-gradient(45deg, #2E7D32, #4CAF50); color: white;
@@ -212,7 +246,8 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="shop.html" class="active">Products</a></li>
                 <li><a href="about.html">About</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
             <button class="cart-toggle" onclick="toggleCart()">
                 🛒 Cart
