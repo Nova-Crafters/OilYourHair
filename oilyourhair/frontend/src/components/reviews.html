@@ -94,7 +94,111 @@
             color: #2E7D32;
         }
 
-        /* Main Content */
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 2000;
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 20px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .close-modal:hover {
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        .star-rating-input {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+        }
+
+        .star-rating-input input {
+            display: none;
+        }
+
+        .star-rating-input label {
+            font-size: 2rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .star-rating-input label:hover,
+        .star-rating-input label:hover ~ label,
+        .star-rating-input input:checked ~ label {
+            color: #ffd700;
+        }
+
+        .submit-review {
+            background: linear-gradient(45deg, #2E7D32, #4CAF50);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+        }
+
+        .submit-review:hover {
+            transform: translateY(-2px);
+        }
+                /* Main Content */
         main {
             padding: 12rem 0 5rem 0;
         }
@@ -294,8 +398,7 @@
             font-size: 1.1rem;
             letter-spacing: 1px;
         }
-
-        .review-content {
+                .review-content {
             margin-bottom: 1.5rem;
         }
 
@@ -503,158 +606,65 @@
             <p class="section-subtitle">Read what our customers are saying about their natural hair transformation journey.</p>
 
             <div class="reviews-grid">
-                <div class="review-card">
-                    <div class="reviewer-header">
-                        <div class="reviewer-avatar">S</div>
-                        <div class="reviewer-info">
-                            <h3>Sarah Mitchell</h3>
-                            <div class="reviewer-meta">
-                                <div class="review-date">March 15, 2025</div>
-                                <div class="review-rating">★★★★★</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="review-content">
-                        <div class="review-text">
-                            "Absolutely love this hair oil! My hair has never felt so soft and healthy. The natural ingredients really make a difference, and I love that it's ethically sourced."
-                        </div>
-                        <div class="review-highlight">
-                            "Been using it for 3 months now and the results are incredible - my hair stylist is amazed!"
-                        </div>
-                    </div>
-                    <div class="review-footer">
-                        <div class="review-product">Nourishing Hair Oil</div>
-                        <div class="review-helpful">Helpful (24)</div>
-                    </div>
-                </div>
-
-                <div class="review-card">
-                    <div class="reviewer-header">
-                        <div class="reviewer-avatar">M</div>
-                        <div class="reviewer-info">
-                            <h3>Maria Rodriguez</h3>
-                            <div class="reviewer-meta">
-                                <div class="review-date">March 12, 2025</div>
-                                <div class="review-rating">★★★★★</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="review-content">
-                        <div class="review-text">
-                            "This is hands down the best hair care product I've ever used. My curls are more defined, less frizzy, and so much shinier."
-                        </div>
-                        <div class="review-highlight">
-                            "The scent is divine too - not overpowering but beautifully natural and calming."
-                        </div>
-                    </div>
-                    <div class="review-footer">
-                        <div class="review-product">Curl Defining Serum</div>
-                        <div class="review-helpful">Helpful (18)</div>
-                    </div>
-                </div>
-
-                <div class="review-card">
-                    <div class="reviewer-header">
-                        <div class="reviewer-avatar">J</div>
-                        <div class="reviewer-info">
-                            <h3>Jessica Chen</h3>
-                            <div class="reviewer-meta">
-                                <div class="review-date">March 10, 2025</div>
-                                <div class="review-rating">★★★★★</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="review-content">
-                        <div class="review-text">
-                            "My hair was severely damaged from years of heat styling. I was skeptical at first, but decided to give natural hair care a try."
-                        </div>
-                        <div class="review-highlight">
-                            "After 2 months with OilYourHair, I can see new growth and my hair feels stronger than ever!"
-                        </div>
-                    </div>
-                    <div class="review-footer">
-                        <div class="review-product">Repair Treatment Oil</div>
-                        <div class="review-helpful">Helpful (31)</div>
-                    </div>
-                </div>
-
-                <div class="review-card">
-                    <div class="reviewer-header">
-                        <div class="reviewer-avatar">L</div>
-                        <div class="reviewer-info">
-                            <h3>Lisa Thompson</h3>
-                            <div class="reviewer-meta">
-                                <div class="review-date">March 8, 2025</div>
-                                <div class="review-rating">★★★★☆</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="review-content">
-                        <div class="review-text">
-                            "Great product overall! Love the natural ingredients and how it makes my hair feel silky smooth without any greasy residue."
-                        </div>
-                        <div class="review-highlight">
-                            "Only wish it came in a larger size option for better value - would definitely purchase again!"
-                        </div>
-                    </div>
-                    <div class="review-footer">
-                        <div class="review-product">Daily Moisture Oil</div>
-                        <div class="review-helpful">Helpful (12)</div>
-                    </div>
-                </div>
-
-                <div class="review-card">
-                    <div class="reviewer-header">
-                        <div class="reviewer-avatar">A</div>
-                        <div class="reviewer-info">
-                            <h3>Amanda Johnson</h3>
-                            <div class="reviewer-meta">
-                                <div class="review-date">March 5, 2025</div>
-                                <div class="review-rating">★★★★★</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="review-content">
-                        <div class="review-text">
-                            "I've tried so many hair products over the years, spending hundreds on salon treatments and expensive brands with little success."
-                        </div>
-                        <div class="review-highlight">
-                            "Nothing compares to this - my hair stylist asked what I've been using because it looks so vibrant!"
-                        </div>
-                    </div>
-                    <div class="review-footer">
-                        <div class="review-product">Shine & Strength Formula</div>
-                        <div class="review-helpful">Helpful (27)</div>
-                    </div>
-                </div>
-
-                <div class="review-card">
-                    <div class="reviewer-header">
-                        <div class="reviewer-avatar">R</div>
-                        <div class="reviewer-info">
-                            <h3>Rachel Green</h3>
-                            <div class="reviewer-meta">
-                                <div class="review-date">March 2, 2025</div>
-                                <div class="review-rating">★★★★★</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="review-content">
-                        <div class="review-text">
-                            "Fast shipping, beautiful eco-friendly packaging, and most importantly - amazing results that speak for themselves."
-                        </div>
-                        <div class="review-highlight">
-                            "My hair has never been this manageable. Already recommended to all my friends and family!"
-                        </div>
-                    </div>
-                    <div class="review-footer">
-                        <div class="review-product">Complete Hair Care Set</div>
-                        <div class="review-helpful">Helpful (35)</div>
-                    </div>
-                </div>
+                <!-- Existing review cards will be here -->
             </div>
         </section>
     </main>
+
+    <!-- Review Modal -->
+    <div id="reviewModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Write Your Review</h2>
+            <form id="reviewForm">
+                <div class="form-group">
+                    <label for="reviewerName">Your Name</label>
+                    <input type="text" id="reviewerName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Rating</label>
+                    <div class="star-rating-input">
+                        <input type="radio" id="star5" name="rating" value="5" required>
+                        <label for="star5">★</label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4">★</label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3">★</label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2">★</label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1">★</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="productSelect">Product</label>
+                    <select id="productSelect" required>
+                        <option value="">Select a product</option>
+                        <option value="Nourishing Hair Oil">Nourishing Hair Oil</option>
+                        <option value="Curl Defining Serum">Curl Defining Serum</option>
+                        <option value="Repair Treatment Oil">Repair Treatment Oil</option>
+                        <option value="Daily Moisture Oil">Daily Moisture Oil</option>
+                        <option value="Shine & Strength Formula">Shine & Strength Formula</option>
+                        <option value="Complete Hair Care Set">Complete Hair Care Set</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="reviewText">Your Review</label>
+                    <textarea id="reviewText" rows="4" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="reviewHighlight">Highlight (Optional)</label>
+                    <input type="text" id="reviewHighlight" placeholder="Share your key takeaway">
+                </div>
+
+                <button type="submit" class="submit-review">Submit Review</button>
+            </form>
+        </div>
+    </div>
 
     <button class="add-review-btn" onclick="addReview()" title="Add Your Review">+</button>
 
@@ -669,24 +679,112 @@
             <p>&copy; 2025 OilYourHair. All rights reserved. Nourish Your Crown - Transform Your Hair.</p>
         </div>
     </footer>
+        <script>
+        // Sample initial reviews data
+        const initialReviews = [
+            {
+                name: "Sarah Mitchell",
+                rating: 5,
+                date: "March 15, 2025",
+                product: "Nourishing Hair Oil",
+                text: "Absolutely love this hair oil! My hair has never felt so soft and healthy. The natural ingredients really make a difference, and I love that it's ethically sourced.",
+                highlight: "Been using it for 3 months now and the results are incredible - my hair stylist is amazed!"
+            },
+            {
+                name: "Maria Rodriguez",
+                rating: 5,
+                date: "March 12, 2025",
+                product: "Curl Defining Serum",
+                text: "This is hands down the best hair care product I've ever used. My curls are more defined, less frizzy, and so much shinier.",
+                highlight: "The scent is divine too - not overpowering but beautifully natural and calming."
+            },
+            {
+                name: "Jessica Chen",
+                rating: 5,
+                date: "March 10, 2025",
+                product: "Repair Treatment Oil",
+                text: "My hair was severely damaged from years of heat styling. I was skeptical at first, but decided to give natural hair care a try.",
+                highlight: "After 2 months with OilYourHair, I can see new growth and my hair feels stronger than ever!"
+            }
+        ];
 
-    <script>
-        function addReview() {
-            alert('Add Review feature coming soon! We\'re working on making it easy for you to share your experience.');
+        // Function to create a review card
+        function createReviewCard(review) {
+            const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+            const initial = review.name.charAt(0);
+
+            return `
+                <div class="review-card">
+                    <div class="reviewer-header">
+                        <div class="reviewer-avatar">${initial}</div>
+                        <div class="reviewer-info">
+                            <h3>${review.name}</h3>
+                            <div class="reviewer-meta">
+                                <div class="review-date">${review.date}</div>
+                                <div class="review-rating">${stars}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <div class="review-text">"${review.text}"</div>
+                        ${review.highlight ? `<div class="review-highlight">"${review.highlight}"</div>` : ''}
+                    </div>
+                    <div class="review-footer">
+                        <div class="review-product">${review.product}</div>
+                        <div class="review-helpful">Helpful (0)</div>
+                    </div>
+                </div>
+            `;
         }
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+        // Load initial reviews
+        function loadInitialReviews() {
+            const reviewsGrid = document.querySelector('.reviews-grid');
+            initialReviews.forEach(review => {
+                reviewsGrid.innerHTML += createReviewCard(review);
             });
+        }
+
+        // Add review functionality
+        function addReview() {
+            document.getElementById('reviewModal').style.display = 'block';
+        }
+
+        // Close modal when clicking the X or outside the modal
+        document.querySelector('.close-modal').onclick = function() {
+            document.getElementById('reviewModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('reviewModal')) {
+                document.getElementById('reviewModal').style.display = 'none';
+            }
+        }
+
+        // Handle form submission
+        document.getElementById('reviewForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const newReview = {
+                name: document.getElementById('reviewerName').value,
+                rating: parseInt(document.querySelector('input[name="rating"]:checked').value),
+                date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+                product: document.getElementById('productSelect').value,
+                text: document.getElementById('reviewText').value,
+                highlight: document.getElementById('reviewHighlight').value
+            };
+            
+            // Add new review to grid
+            const reviewsGrid = document.querySelector('.reviews-grid');
+            reviewsGrid.insertAdjacentHTML('afterbegin', createReviewCard(newReview));
+            
+            // Reset form and close modal
+            this.reset();
+            document.getElementById('reviewModal').style.display = 'none';
+            
+            // Show success message
+            alert('Thank you for your review!');
         });
 
         // Header scroll effect
@@ -701,27 +799,8 @@
             }
         });
 
-        // Add scroll animation for elements
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.review-card, .review-stats, .page-hero, .section-title').forEach((el, index) => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = `all 0.6s ease ${index * 0.1}s`;
-            observer.observe(el);
-        });
+        // Initialize reviews on page load
+        document.addEventListener('DOMContentLoaded', loadInitialReviews);
     </script>
 </body>
 </html>
