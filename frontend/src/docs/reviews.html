@@ -679,39 +679,14 @@
             <p>&copy; 2025 OilYourHair. All rights reserved. Nourish Your Crown - Transform Your Hair.</p>
         </div>
     </footer>
-        <script>
-        // Sample initial reviews data
-        const initialReviews = [
-            {
-                name: "Sarah Mitchell",
-                rating: 5,
-                date: "March 15, 2025",
-                product: "Nourishing Hair Oil",
-                text: "Absolutely love this hair oil! My hair has never felt so soft and healthy. The natural ingredients really make a difference, and I love that it's ethically sourced.",
-                highlight: "Been using it for 3 months now and the results are incredible - my hair stylist is amazed!"
-            },
-            {
-                name: "Maria Rodriguez",
-                rating: 5,
-                date: "March 12, 2025",
-                product: "Curl Defining Serum",
-                text: "This is hands down the best hair care product I've ever used. My curls are more defined, less frizzy, and so much shinier.",
-                highlight: "The scent is divine too - not overpowering but beautifully natural and calming."
-            },
-            {
-                name: "Jessica Chen",
-                rating: 5,
-                date: "March 10, 2025",
-                product: "Repair Treatment Oil",
-                text: "My hair was severely damaged from years of heat styling. I was skeptical at first, but decided to give natural hair care a try.",
-                highlight: "After 2 months with OilYourHair, I can see new growth and my hair feels stronger than ever!"
-            }
-        ];
+    <script>
+        const API_URL = 'http://localhost:5000/api';
 
         // Function to create a review card
         function createReviewCard(review) {
             const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
             const initial = review.name.charAt(0);
+            const date = new Date(review.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
             return `
                 <div class="review-card">
@@ -720,7 +695,7 @@
                         <div class="reviewer-info">
                             <h3>${review.name}</h3>
                             <div class="reviewer-meta">
-                                <div class="review-date">${review.date}</div>
+                                <div class="review-date">${date}</div>
                                 <div class="review-rating">${stars}</div>
                             </div>
                         </div>
@@ -731,18 +706,36 @@
                     </div>
                     <div class="review-footer">
                         <div class="review-product">${review.product}</div>
-                        <div class="review-helpful">Helpful (0)</div>
+                        <div class="review-helpful">Helpful (${review.helpfulCount || 0})</div>
                     </div>
                 </div>
             `;
         }
 
-        // Load initial reviews
-        function loadInitialReviews() {
-            const reviewsGrid = document.querySelector('.reviews-grid');
-            initialReviews.forEach(review => {
-                reviewsGrid.innerHTML += createReviewCard(review);
-            });
+        // Load reviews from API
+        async function loadReviews() {
+            try {
+                const response = await fetch(`${API_URL}/reviews`);
+                const data = await response.json();
+                
+                const reviewsGrid = document.querySelector('.reviews-grid');
+                reviewsGrid.innerHTML = ''; // Clear existing reviews
+                
+                if (data.reviews && data.reviews.length > 0) {
+                    data.reviews.forEach(review => {
+                        reviewsGrid.innerHTML += createReviewCard(review);
+                    });
+                } else {
+                    // If no reviews, load initial sample reviews
+                    initialReviews.forEach(review => {
+                        reviewsGrid.innerHTML += createReviewCard(review);
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading reviews:', error);
+                // Load initial reviews as fallback
+                loadInitialReviews();
+            }
         }
 
         // Add review functionality
@@ -762,29 +755,42 @@
         }
 
         // Handle form submission
-        document.getElementById('reviewForm').addEventListener('submit', function(e) {
+        document.getElementById('reviewForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            // Get form values
             const newReview = {
                 name: document.getElementById('reviewerName').value,
                 rating: parseInt(document.querySelector('input[name="rating"]:checked').value),
-                date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
                 product: document.getElementById('productSelect').value,
                 text: document.getElementById('reviewText').value,
                 highlight: document.getElementById('reviewHighlight').value
             };
             
-            // Add new review to grid
-            const reviewsGrid = document.querySelector('.reviews-grid');
-            reviewsGrid.insertAdjacentHTML('afterbegin', createReviewCard(newReview));
-            
-            // Reset form and close modal
-            this.reset();
-            document.getElementById('reviewModal').style.display = 'none';
-            
-            // Show success message
-            alert('Thank you for your review!');
+            try {
+                const response = await fetch(`${API_URL}/reviews`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(newReview)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to submit review');
+                }
+
+                // Reset form and close modal
+                this.reset();
+                document.getElementById('reviewModal').style.display = 'none';
+                
+                // Reload reviews
+                await loadReviews();
+                
+                alert('Thank you for your review!');
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error submitting review. Please try again.');
+            }
         });
 
         // Header scroll effect
@@ -800,70 +806,7 @@
         });
 
         // Initialize reviews on page load
-        document.addEventListener('DOMContentLoaded', loadInitialReviews);
-        // API functions
-        const API_URL = 'http://localhost:5000/api';
-
-        async function fetchReviews() {
-            try {
-                const response = await fetch(`${API_URL}/reviews`);
-                const reviews = await response.json();
-                return reviews;
-            } catch (error) {
-                console.error('Error fetching reviews:', error);
-                return [];
-            }
-        }
-
-        async function submitReview(reviewData) {
-            try {
-                const response = await fetch(`${API_URL}/reviews`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(reviewData)
-                });
-                return await response.json();
-            } catch (error) {
-                console.error('Error submitting review:', error);
-                throw error;
-            }
-        }
-
-        // Modify your loadInitialReviews function
-        async function loadInitialReviews() {
-            const reviewsGrid = document.querySelector('.reviews-grid');
-            reviewsGrid.innerHTML = ''; // Clear existing reviews
-            
-            const reviews = await fetchReviews();
-            reviews.forEach(review => {
-                reviewsGrid.innerHTML += createReviewCard(review);
-            });
-        }
-
-        // Modify your form submission handler
-        document.getElementById('reviewForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const newReview = {
-                name: document.getElementById('reviewerName').value,
-                rating: parseInt(document.querySelector('input[name="rating"]:checked').value),
-                product: document.getElementById('productSelect').value,
-                text: document.getElementById('reviewText').value,
-                highlight: document.getElementById('reviewHighlight').value
-            };
-            
-            try {
-                await submitReview(newReview);
-                this.reset();
-                document.getElementById('reviewModal').style.display = 'none';
-                await loadInitialReviews(); // Reload all reviews
-                alert('Thank you for your review!');
-            } catch (error) {
-                alert('Error submitting review. Please try again.');
-            }
-        });
+        document.addEventListener('DOMContentLoaded', loadReviews);
     </script>
 </body>
 </html>
